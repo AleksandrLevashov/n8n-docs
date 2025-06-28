@@ -1,0 +1,40 @@
+# Упрощенный файл конфигурации для сборки документации в формате Markdown
+# Основные свойства сайта
+site_name: n8n Docs
+site_url: https://docs.n8n.io/
+# Директории для отслеживания изменений
+watch:
+  - _glossary
+  - _snippets
+
+# Структура навигации, импортированная из внешнего файла
+nav: !include nav.yml
+
+# Расширения Markdown, влияющие на контент
+markdown_extensions:
+  - abbr
+  - attr_list
+  - md_in_html
+  - meta
+  - pymdownx.blocks.admonition
+  - pymdownx.details
+  - pymdownx.snippets:
+      auto_append:
+        - _glossary/main.md
+  - sane_lists
+  - tables
+  - toc:
+      permalink: '#'
+
+# Плагины
+plugins:
+  # Макросы для вставки контента
+  - macros:
+      include_yaml:
+      - _yaml/data-functions.yml
+      j2_block_start_string: '[[%'
+      j2_block_end_string: '%]]'
+      j2_variable_start_string: '[['
+      j2_variable_end_string: ']]'
+  # Плагин для экспорта в Markdown
+  - md-writer: {}
