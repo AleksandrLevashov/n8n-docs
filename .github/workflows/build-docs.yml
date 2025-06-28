@@ -17,33 +17,31 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      # 2. Настройка среды Python версии 3.11.
-      - name: Set up Python 3.11
+      # 2. Настройка среды Python.
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: 3.12
 
-      # 3. Установка зависимостей проекта.
+      # 3. Установка зависимостей в виртуальном окружении.
       - name: Install dependencies
         run: |
           python3 -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
-          pip install mkdocs-material
+          pip install mkdocs-md-writer-plugin
       
-      # 4. Сборка сайта документации с помощью тестовой конфигурации.
-      # Используем mkdocs-test.yml, чтобы избежать ошибок с платными плагинами.
-      - name: Build documentation
+      # 4. Сборка документации с использованием специальной конфигурации.
+      - name: Build documentation and export to Markdown
         run: |
           source venv/bin/activate
-          mkdocs build --config-file mkdocs-test.yml --strict --verbose
+          mkdocs build --config-file mkdocs-build-docs.yml --strict --verbose
 
-      # 5. Загрузка собранной документации как артефакта.
-      # Это позволит скачать результат сборки со страницы выполнения рабочего процесса.
-      - name: Upload documentation artifact
+      # 5. Загрузка скомпилированных Markdown файлов как артефакта.
+      - name: Upload Markdown artifact
         uses: actions/upload-artifact@v4
         with:
           # Имя артефакта, которое будет отображаться в GitHub.
-          name: n8n-docs-site
-          # Путь к директории с собранным сайтом, которую нужно загрузить.
-          path: site
+          name: n8n-docs-markdown
+          # Путь к директории с MD файлами, которую нужно загрузить.
+          path: md_output
