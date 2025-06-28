@@ -26,18 +26,15 @@ jobs:
           cache: 'pip'
 
       # 3. Установка зависимостей проекта.
-      # Сначала устанавливаем mkdocs и material, чтобы избежать проблем с зависимостями.
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install mkdocs mkdocs-material
           pip install -r requirements.txt
       
-      # 4. Сборка сайта документации с помощью MkDocs.
-      # --strict: прерывает сборку при наличии предупреждений.
-      # --verbose: выводит подробную информацию о процессе сборки.
+      # 4. Сборка сайта документации с помощью тестовой конфигурации.
+      # Используем mkdocs-test.yml, чтобы избежать ошибок с платными плагинами.
       - name: Build documentation
-        run: mkdocs build --strict --verbose
+        run: mkdocs build --config-file mkdocs-test.yml --strict --verbose
 
       # 5. Загрузка собранной документации как артефакта.
       # Это позволит скачать результат сборки со страницы выполнения рабочего процесса.
