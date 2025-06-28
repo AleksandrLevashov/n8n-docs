@@ -44,4 +44,4 @@ jobs:
           # Имя артефакта, которое будет отображаться в GitHub.
           name: n8n-docs-markdown
           # Путь к директории с MD файлами, которую нужно загрузить.
-          path: md_output
+          path: md_files
