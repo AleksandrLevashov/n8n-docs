@@ -29,7 +29,7 @@ jobs:
           python3 -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
-          pip install mkdocs-md-writer-plugin
+          pip install mkdocs-md-export-plugin
       
       # 4. Сборка документации с использованием специальной конфигурации.
       - name: Build documentation and export to Markdown
