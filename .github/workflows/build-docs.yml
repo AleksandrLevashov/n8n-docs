@@ -25,10 +25,12 @@ jobs:
           # Кэширование зависимостей pip для ускорения последующих сборок.
           cache: 'pip'
 
-      # 3. Установка зависимостей проекта из файла requirements.txt.
+      # 3. Установка зависимостей проекта.
+      # Сначала устанавливаем mkdocs и material, чтобы избежать проблем с зависимостями.
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          pip install mkdocs mkdocs-material
           pip install -r requirements.txt
       
       # 4. Сборка сайта документации с помощью MkDocs.
